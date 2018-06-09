@@ -3,7 +3,6 @@ import EmployeeList from "../components/EmployeeList";
 import EditMenu from "../components/EditMenu";
 import Button from "../components/Button";
 import generateEmployees from "../helpers/generateEmployees";
-import "../App.css";
 
 class App extends React.Component {
   state = {

@@ -53,7 +53,7 @@ test("removes item from the list on 'remove' button click", () => {
 
 test("text in the list item changes when text in menu item is changed", () => {
   const { getAllByTestId } = render(<App />);
-  const menuInput = getAllByTestId("menu-input")[0];
+  const menuInput = getAllByTestId("menu-input")[1];
   const listText = getAllByTestId("list-text")[0];
   Simulate.change(menuInput, { target: { value: "test!" } });
   expect(listText.textContent).toMatch("test!");

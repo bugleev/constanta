@@ -2,23 +2,21 @@ import React from "react";
 import EmployeeList from "../components/EmployeeList";
 import EditMenu from "../components/EditMenu";
 import Button from "../components/Button";
-import generateEmployees from "../helpers/generateEmployees";
+import employeeData from "../data";
 
 class App extends React.Component {
   state = {
     employees: [],
-    currentList: [],
     showMenu: false
   };
   componentDidMount() {
-    const data = generateEmployees(3);
-    this.setState({ employees: data, currentList: data });
+    this.setState({ employees: employeeData });
   }
   handleOpenMenu = () => {
     this.setState({ showMenu: !this.state.showMenu });
   };
   handleListChange = newList => {
-    this.setState({ currentList: newList });
+    this.setState({ employees: newList });
   };
   render() {
     return (
@@ -29,13 +27,13 @@ class App extends React.Component {
             text={this.state.showMenu ? "Close Menu" : "Open Menu"}
             action={this.handleOpenMenu}
           />
-          <EmployeeList data={this.state.currentList} />
+          <EmployeeList data={this.state.employees} />
         </div>
         <EditMenu
-          data={this.state.currentList}
+          data={this.state.employees}
           show={this.state.showMenu}
           onChange={this.handleListChange}
-          scrollable={this.state.currentList.length > 5 ? true : false}
+          scrollable={this.state.employees.length > 5 ? true : false}
         />
       </div>
     );

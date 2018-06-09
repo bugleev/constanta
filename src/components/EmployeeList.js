@@ -7,7 +7,7 @@ function EmployeeList(props) {
       {props.data.map(
         (el, i) =>
           el.status !== "removed" ? (
-            <li className="employee-li" key={i}>
+            <li className="employee-li" key={el.id}>
               <span className="employee-name" data-testid="list-text">
                 {el.name}
               </span>

@@ -39,8 +39,8 @@ class EditMenu extends React.PureComponent {
     return (
       <div className={`menu-wrapper${this.composeClassnames()}`}>
         <Button type="menu-button" text="Add item" action={this.addItem} />
-        {this.props.data.map((el, i) => (
-          <form action="get" onSubmit={this.handleSubmit} key={i}>
+        {this.props.data.map(el => (
+          <form action="get" onSubmit={this.handleSubmit} key={el.id}>
             <label htmlFor="textarea">
               Employee #
               <span>{el.id}</span>

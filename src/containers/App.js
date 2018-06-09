@@ -1,26 +1,39 @@
 import React from "react";
 import EmployeeList from "../components/EmployeeList";
-import ListButton from "../components/ListButton";
-import ListEdit from "../components/ListEdit";
+import EditMenu from "../components/EditMenu";
 import generateEmployees from "../helpers/generateEmployees";
 import "../App.css";
 
 class App extends React.Component {
   state = {
-    employees: []
+    employees: [],
+    currentList: [],
+    showMenu: false
   };
   componentDidMount() {
-    this.setState({ employees: generateEmployees(6) });
+    const data = generateEmployees(3);
+    this.setState({ employees: data, currentList: data });
   }
+  handleOpenMenu = () => {
+    this.setState({ showMenu: !this.state.showMenu });
+  };
+  handleListChange = newList => {
+    this.setState({ currentList: newList });
+  };
   render() {
-    console.log(this.state.employees);
     return (
-      <React.Fragment>
-        <EmployeeList data={this.state.employees}>
-          <ListButton />
-        </EmployeeList>
-        <ListEdit />
-      </React.Fragment>
+      <div className="layout">
+        <EmployeeList
+          visibleMenu={this.state.showMenu}
+          data={this.state.currentList}
+          openButton={this.handleOpenMenu}
+        />
+        <EditMenu
+          data={this.state.currentList}
+          show={this.state.showMenu}
+          onChange={this.handleListChange}
+        />
+      </div>
     );
   }
 }

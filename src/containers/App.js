@@ -1,6 +1,7 @@
 import React from "react";
 import EmployeeList from "../components/EmployeeList";
 import EditMenu from "../components/EditMenu";
+import Button from "../components/Button";
 import generateEmployees from "../helpers/generateEmployees";
 import "../App.css";
 
@@ -23,15 +24,19 @@ class App extends React.Component {
   render() {
     return (
       <div className="layout">
-        <EmployeeList
-          visibleMenu={this.state.showMenu}
-          data={this.state.currentList}
-          openButton={this.handleOpenMenu}
-        />
+        <div>
+          <Button
+            type="list-button"
+            text={this.state.showMenu ? "Close Menu" : "Open Menu"}
+            action={this.handleOpenMenu}
+          />
+          <EmployeeList data={this.state.currentList} />
+        </div>
         <EditMenu
           data={this.state.currentList}
           show={this.state.showMenu}
           onChange={this.handleListChange}
+          scrollable={this.state.currentList.length > 5 ? true : false}
         />
       </div>
     );

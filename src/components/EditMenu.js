@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Button from "./Button";
+import PropTypes from "prop-types";
 
-export default class EditMenu extends Component {
+class EditMenu extends React.PureComponent {
   handleSubmit = e => {
     e.preventDefault();
   };
@@ -25,16 +26,21 @@ export default class EditMenu extends Component {
   };
   addItem = () => {
     const employees = [...this.props.data];
-    employees.push({ name: "", position: "", id: employees.length + 2 });
+    employees.push({ name: "", position: "", id: employees.length + 1 });
     this.props.onChange(employees);
   };
+  composeClassnames = () => {
+    let classname = "";
+    classname += this.props.show ? " open" : "";
+    classname += this.props.scrollable ? " scroll" : "";
+    return classname;
+  };
   render() {
-    const className = this.props.show ? "open" : "";
     return (
-      <div className={`menu-wrapper ${className}`}>
-        <Button type="menu-button" text="Add item" add={this.addItem} />
+      <div className={`menu-wrapper${this.composeClassnames()}`}>
+        <Button type="menu-button" text="Add item" action={this.addItem} />
         {this.props.data.map((el, i) => (
-          <form action="get" onSubmit={this.handleSubmit}>
+          <form action="get" onSubmit={this.handleSubmit} key={i}>
             <label htmlFor="textarea">
               Employee #
               <span>{el.id}</span>
@@ -43,10 +49,10 @@ export default class EditMenu extends Component {
               type="text"
               value={el.name}
               onChange={e => this.handleTextChange(e, el.id, "name")}
+              data-testid="menu-input"
             />
             <textarea
               name="employee-info"
-              id=""
               cols="30"
               rows="5"
               onChange={e => this.handleTextChange(e, el.id)}
@@ -55,7 +61,7 @@ export default class EditMenu extends Component {
             <Button
               type="menu-button"
               text={!el.status ? "remove" : "restore"}
-              move={e => this.moveItem(e, el.id)}
+              action={e => this.moveItem(e, el.id)}
             />
           </form>
         ))}
@@ -63,3 +69,11 @@ export default class EditMenu extends Component {
     );
   }
 }
+EditMenu.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  show: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  scrollable: PropTypes.bool.isRequired
+};
+
+export default EditMenu;

@@ -5,10 +5,7 @@
   </a>
   <br>
   <br>
-  <p>
-   Тестовое задание
-  </p>
-</div>
+  </div>
 <h3 align="center">Описание</h3>
 
 Выполнено на стеке HTML, CSS, React. Бойлерплейт - [create-react-app](https://github.com/facebook/create-react-app). 

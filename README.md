@@ -1,5 +1,5 @@
 <div align="center">
-<h2>Список сотрудников</h2>
+<h2>Редактируемый список</h2>
   <a href="https://reactjs.org/">
     <img width="100" heigth="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png">
   </a>
